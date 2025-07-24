@@ -8,6 +8,7 @@ import org.example.repository.FurnitureRepository;
 import org.example.service.FurnitureService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -31,6 +32,19 @@ public class FurnitureServiceImpl extends GenericCrudImpl<Furniture, UUID> imple
         Furniture entity = furnitureMapper.fromRequest(request);
         Furniture saved = furnitureRepository.save(entity);
         return furnitureMapper.toDto(saved);
+    }
+
+    @Override
+    public FurnitureDto findById(UUID id) {
+        return furnitureMapper.toDto(furnitureRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Furniture not found")));
+    }
+
+    @Override
+    public List<FurnitureDto> findAll() {
+        return furnitureRepository.findAll().stream()
+                .map(furnitureMapper::toDto)
+                .toList();
     }
 
     @Override

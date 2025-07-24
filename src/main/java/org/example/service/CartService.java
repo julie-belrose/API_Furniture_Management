@@ -12,6 +12,11 @@ import java.util.UUID;
 public interface CartService {
 
     /**
+     * Returns the cart item with the specified ID.
+     */
+    CartItemDto getCartItemById(UUID id);
+
+    /**
      * Returns all cart items with detailed furniture info.
      */
     List<CartItemDto> getAllCartItems();

@@ -3,6 +3,7 @@ package org.example.service;
 import org.example.dto.FurnitureDto;
 import org.example.dto.FurnitureRequest;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -10,6 +11,10 @@ import java.util.UUID;
  */
 public interface FurnitureService {
     FurnitureDto create(FurnitureRequest request);
+
+    FurnitureDto findById(UUID id);
+
+    List<FurnitureDto> findAll();
 
     FurnitureDto save(FurnitureDto dto);
 

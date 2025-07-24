@@ -1,6 +1,5 @@
 package org.example.service.impl;
 
-import lombok.RequiredArgsConstructor;
 import org.example.domain.cart.CartItem;
 import org.example.domain.furniture.Furniture;
 import org.example.dto.AddCartItemRequest;
@@ -18,7 +17,7 @@ import java.util.UUID;
  * Service implementation for cart operations.
  */
 @Service
-public class CartServiceImpl extends GenericCrudImpl<CartItem, UUID> implements CartService {
+public abstract class CartServiceImpl extends GenericCrudImpl<CartItem, UUID> implements CartService {
 
     private final CartItemRepository cartItemRepository;
     private final FurnitureRepository furnitureRepository;
