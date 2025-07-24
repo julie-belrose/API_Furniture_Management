@@ -29,7 +29,7 @@ public class FurnitureMapperImpl implements FurnitureMapper {
         if (dto == null) return null;
 
         return Furniture.builder()
-                .id(dto.getId()) 
+                .id(dto.getId())
                 .name(dto.getName())
                 .description(dto.getDescription())
                 .price(dto.getPrice())
