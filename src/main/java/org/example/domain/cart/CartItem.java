@@ -3,7 +3,6 @@ package org.example.domain.cart;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.domain.furniture.Furniture;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 
@@ -21,9 +20,7 @@ import java.util.UUID;
 public class CartItem {
 
     @Id // Declares the primary key of the entity
-    @GeneratedValue(generator = "UUID") // Uses a custom generator to auto-generate UUIDs
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator") // Defines a UUID generation strategy
-                                                                                  // (Hibernate)
+    @GeneratedValue(strategy = GenerationType.UUID) // Uses a custom generator to auto-generate UUID
     @Column(name = "id", updatable = false, nullable = false) // Makes the column required and immutable
     private UUID id;
 
