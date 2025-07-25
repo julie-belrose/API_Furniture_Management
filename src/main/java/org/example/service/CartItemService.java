@@ -9,7 +9,7 @@ import java.util.UUID;
 /**
  * Service interface for shopping cart operations.
  */
-public interface CartService {
+public interface CartItemService {
 
     /**
      * Returns the cart item with the specified ID.

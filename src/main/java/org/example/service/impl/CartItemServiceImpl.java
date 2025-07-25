@@ -7,7 +7,7 @@ import org.example.dto.CartItemDto;
 import org.example.mapper.CartItemMapper;
 import org.example.repository.CartItemRepository;
 import org.example.repository.FurnitureRepository;
-import org.example.service.CartService;
+import org.example.service.CartItemService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,15 +17,15 @@ import java.util.UUID;
  * Service implementation for cart operations.
  */
 @Service
-public abstract class CartServiceImpl extends GenericCrudImpl<CartItemDto, CartItem, UUID> implements CartService {
+public abstract class CartItemServiceImpl extends GenericCrudImpl<CartItemDto, CartItem, UUID> implements CartItemService {
 
     private final CartItemRepository cartItemRepository;
     private final FurnitureRepository furnitureRepository;
     private final CartItemMapper cartItemMapper;
 
-    public CartServiceImpl(CartItemRepository cartItemRepository,
-            FurnitureRepository furnitureRepository,
-            CartItemMapper cartItemMapper) {
+    public CartItemServiceImpl(CartItemRepository cartItemRepository,
+                               FurnitureRepository furnitureRepository,
+                               CartItemMapper cartItemMapper) {
         super(cartItemRepository, cartItemMapper);
         this.cartItemRepository = cartItemRepository;
         this.furnitureRepository = furnitureRepository;

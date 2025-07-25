@@ -3,7 +3,7 @@ package org.example.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.AddCartItemRequest;
 import org.example.dto.CartItemDto;
-import org.example.service.CartService;
+import org.example.service.CartItemService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +15,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public abstract class CartController implements GenericCrudController<CartItemDto, UUID> {
 
-    private final CartService cartService;
+    private final CartItemService cartService;
 
     @PostMapping
     public ResponseEntity<CartItemDto> save(@RequestBody AddCartItemRequest request) {
