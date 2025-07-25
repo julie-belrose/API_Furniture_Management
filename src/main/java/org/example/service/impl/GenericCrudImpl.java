@@ -12,6 +12,8 @@ public abstract class GenericCrudImpl<Dto, Entity, ID> implements GenericCrud<Dt
     protected final JpaRepository<Entity, ID> repository;
     protected final GenericMapper<Entity, Dto> mapper;
 
+    protected abstract ID extractId(Dto dto);
+
     protected GenericCrudImpl(JpaRepository<Entity, ID> repository, GenericMapper<Entity, Dto> mapper) {
         this.repository = repository;
         this.mapper = mapper;
@@ -37,10 +39,10 @@ public abstract class GenericCrudImpl<Dto, Entity, ID> implements GenericCrud<Dt
     }
 
     @Override
-    public Dto update(Dto dto) {
+    public Optional<Dto> update(Dto dto) {
         Entity entity = mapper.toEntity(dto);
         Entity updated = repository.save(entity);
-        return mapper.toDto(updated);
+        return Optional.of(mapper.toDto(updated));
     }
 
     @Override

@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.example.dto.FurnitureDto;
 import org.example.dto.FurnitureRequest;
 import org.example.service.FurnitureService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
@@ -30,7 +32,15 @@ public abstract class FurnitureController implements GenericCrudController<Furni
     @Override
     @GetMapping("/{id}")
     public ResponseEntity<FurnitureDto> getById(@PathVariable UUID id) {
-        return ResponseEntity.ok(furnitureService.findById(id));
+        return ResponseEntity.ok(furnitureService.findById(id)
+                .orElseThrow(() -> new RuntimeException("Furniture not found")));
+    }
+
+    @Override
+    @PutMapping
+    public ResponseEntity<FurnitureDto> update(@RequestBody FurnitureDto dto) {
+        return ResponseEntity.ok(furnitureService.update(dto)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Furniture not found")));
     }
 
     @Override

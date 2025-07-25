@@ -39,9 +39,9 @@ public interface GenericCrud<Dto, Entity, ID> {
      * Updates an existing DTO.
      *
      * @param dto the DTO to update
-     * @return the updated DTO
+     * @return an optional containing the updated DTO
      */
-    Dto update(Dto dto);
+    Optional<Dto> update(Dto dto);
 
     /**
      * Deletes a DTO by ID.

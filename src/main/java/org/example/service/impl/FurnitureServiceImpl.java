@@ -36,6 +36,11 @@ public class FurnitureServiceImpl extends GenericCrudImpl<FurnitureDto, Furnitur
     }
 
     @Override
+    protected UUID extractId(FurnitureDto dto) {
+        return dto.getId();
+    }
+
+    @Override
     public Optional<FurnitureDto> findById(UUID id) {
         return furnitureRepository.findById(id).map(furnitureMapper::toDto);
     }
@@ -64,12 +69,12 @@ public class FurnitureServiceImpl extends GenericCrudImpl<FurnitureDto, Furnitur
     }
 
     @Override
-    public FurnitureDto update(FurnitureDto dto) {
+    public Optional<FurnitureDto> update(FurnitureDto dto) {
         if (dto.getId() == null || !furnitureRepository.existsById(dto.getId())) {
-            throw new RuntimeException("Furniture not found or ID is null");
+            return Optional.empty();
         }
         Furniture entity = furnitureMapper.toEntity(dto);
         Furniture updated = furnitureRepository.save(entity);
-        return furnitureMapper.toDto(updated);
+        return Optional.of(furnitureMapper.toDto(updated));
     }
 }

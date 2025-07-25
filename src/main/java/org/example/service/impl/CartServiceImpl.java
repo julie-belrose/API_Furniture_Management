@@ -17,7 +17,7 @@ import java.util.UUID;
  * Service implementation for cart operations.
  */
 @Service
-public abstract class CartServiceImpl extends GenericCrudImpl<CartItem, UUID> implements CartService {
+public abstract class CartServiceImpl extends GenericCrudImpl<CartItemDto, CartItem, UUID> implements CartService {
 
     private final CartItemRepository cartItemRepository;
     private final FurnitureRepository furnitureRepository;
@@ -26,10 +26,15 @@ public abstract class CartServiceImpl extends GenericCrudImpl<CartItem, UUID> im
     public CartServiceImpl(CartItemRepository cartItemRepository,
             FurnitureRepository furnitureRepository,
             CartItemMapper cartItemMapper) {
-        super(cartItemRepository);
+        super(cartItemRepository, cartItemMapper);
         this.cartItemRepository = cartItemRepository;
         this.furnitureRepository = furnitureRepository;
         this.cartItemMapper = cartItemMapper;
+    }
+
+    @Override
+    protected UUID extractId(CartItemDto dto) {
+        return dto.getId();
     }
 
     @Override
@@ -49,6 +54,12 @@ public abstract class CartServiceImpl extends GenericCrudImpl<CartItem, UUID> im
 
         CartItem saved = cartItemRepository.save(item);
         return cartItemMapper.toDto(saved);
+    }
+
+    public CartItemDto updateCartItem(UUID id, CartItemDto dto) {
+        CartItem entity = cartItemMapper.toEntity(dto);
+        CartItem updated = cartItemRepository.save(entity);
+        return cartItemMapper.toDto(updated);
     }
 
     @Override

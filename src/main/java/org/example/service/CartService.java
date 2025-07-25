@@ -27,6 +27,11 @@ public interface CartService {
     CartItemDto addCartItem(AddCartItemRequest request);
 
     /**
+     * Updates an existing cart item.
+     */
+    CartItemDto updateCartItem(UUID id, AddCartItemRequest request);
+
+    /**
      * Removes an item from the cart by ID.
      */
     boolean removeCartItem(UUID id);

@@ -34,6 +34,12 @@ public abstract class CartController implements GenericCrudController<CartItemDt
         return ResponseEntity.ok(cartService.getAllCartItems());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<CartItemDto> update(@PathVariable UUID id, @RequestBody AddCartItemRequest request) {
+        CartItemDto updated = cartService.updateCartItem(id, request);
+        return ResponseEntity.ok(updated);
+    }
+
     @Override
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id) {
