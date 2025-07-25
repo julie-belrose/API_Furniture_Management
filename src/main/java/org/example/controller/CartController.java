@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.dto.AddCartItemRequest;
 import org.example.dto.CartItemDto;
 import org.example.service.CartService;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +17,9 @@ public abstract class CartController implements GenericCrudController<CartItemDt
 
     private final CartService cartService;
 
-    @Override
     @PostMapping
-    public ResponseEntity<CartItemDto> save(@RequestBody CartItemDto dto) {
-        CartItemDto saved = cartService.addCartItem(dto);
-        return ResponseEntity.ok(saved);
+    public ResponseEntity<CartItemDto> save(@RequestBody AddCartItemRequest request) {
+        return ResponseEntity.ok(cartService.addCartItem(request));
     }
 
     @Override

@@ -46,7 +46,7 @@ public abstract class FurnitureController implements GenericCrudController<Furni
         return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
-    // Endpoint spécifique pour création depuis un FurnitureRequest
+    // Endpoint specific for creation from a FurnitureRequest
     @PostMapping("/create")
     public ResponseEntity<FurnitureDto> create(@RequestBody FurnitureRequest request) {
         return ResponseEntity.ok(furnitureService.create(request));
