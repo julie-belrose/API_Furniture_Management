@@ -9,6 +9,7 @@ import org.example.service.FurnitureService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -16,18 +17,18 @@ import java.util.UUID;
  * Provides business logic for handling furniture operations.
  */
 @Service
-public class FurnitureServiceImpl extends GenericCrudImpl<Furniture, UUID> implements FurnitureService {
+public class FurnitureServiceImpl extends GenericCrudImpl<FurnitureDto, Furniture, UUID> implements FurnitureService {
 
     private final FurnitureRepository furnitureRepository;
     private final FurnitureMapper furnitureMapper;
 
     public FurnitureServiceImpl(FurnitureRepository furnitureRepository, FurnitureMapper furnitureMapper) {
-        super(furnitureRepository);
+        super(furnitureRepository, furnitureMapper);
         this.furnitureRepository = furnitureRepository;
         this.furnitureMapper = furnitureMapper;
     }
 
-    @Override
+
     public FurnitureDto create(FurnitureRequest request) {
         Furniture entity = furnitureMapper.fromRequest(request);
         Furniture saved = furnitureRepository.save(entity);
@@ -35,9 +36,8 @@ public class FurnitureServiceImpl extends GenericCrudImpl<Furniture, UUID> imple
     }
 
     @Override
-    public FurnitureDto findById(UUID id) {
-        return furnitureMapper.toDto(furnitureRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Furniture not found")));
+    public Optional<FurnitureDto> findById(UUID id) {
+        return furnitureRepository.findById(id).map(furnitureMapper::toDto);
     }
 
     @Override
