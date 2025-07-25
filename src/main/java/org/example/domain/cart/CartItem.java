@@ -35,4 +35,8 @@ public class CartItem {
     @Column(nullable = false)
     // Represents how many units of this furniture are in the cart
     private int quantity;
+
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
 }
