@@ -1,9 +1,9 @@
 package org.example.mapper;
 
 import org.example.domain.furniture.Furniture;
-import org.example.dto.FurnitureDto;
-import org.example.dto.FurnitureRequest;
 import org.springframework.stereotype.Component;
+import org.example.dto.furniture.FurnitureDto;
+import org.example.dto.furniture.FurnitureRequest;
 
 /**
  * Manual implementation of FurnitureMapper.

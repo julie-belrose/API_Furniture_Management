@@ -1,8 +1,8 @@
 package org.example.mapper;
 
 import org.example.domain.furniture.Furniture;
-import org.example.dto.FurnitureDto;
-import org.example.dto.FurnitureRequest;
+import org.example.dto.furniture.FurnitureRequest;
+import org.example.dto.furniture.FurnitureDto;
 
 /**
  * Maps between Furniture entity and FurnitureDto.

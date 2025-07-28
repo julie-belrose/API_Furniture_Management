@@ -1,10 +1,10 @@
 package org.example.mapper;
 
+import org.springframework.stereotype.Component;
 import org.example.domain.cart.CartItem;
 import org.example.domain.furniture.Furniture;
-import org.example.dto.CartItemDto;
-import org.example.dto.AddCartItemRequest;
-import org.springframework.stereotype.Component;
+import org.example.dto.cart.CartItemDto;
+import org.example.dto.cart.AddCartItemRequest;
 
 /**
  * Manual implementation of CartItemMapper.
