@@ -1,49 +1,68 @@
 package org.example.controller;
 
+import org.example.dto.cart.AddCartItemRequest;
+import org.example.dto.cart.CartDto;
+import org.example.service.CartService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.example.dto.AddCartItemRequest;
-import org.example.dto.CartItemDto;
-import org.example.service.CartItemService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
+/**
+ * Controller for managing shopping carts.
+ */
 @RestController
 @RequestMapping("/api/cart")
 @RequiredArgsConstructor
-public abstract class CartController implements GenericCrudController<CartItemDto, UUID> {
+public class CartController {
 
-    private final CartItemService cartService;
+    private final CartService cartService;
 
+    /**
+     * Create a new cart.
+     */
     @PostMapping
-    public ResponseEntity<CartItemDto> save(@RequestBody AddCartItemRequest request) {
-        return ResponseEntity.ok(cartService.addCartItem(request));
+    public ResponseEntity<CartDto> createCart() {
+        return ResponseEntity.ok(cartService.createCart());
     }
 
-    @Override
-    @GetMapping("/{id}")
-    public ResponseEntity<CartItemDto> getById(@PathVariable UUID id) {
-        return ResponseEntity.ok(cartService.getCartItemById(id));
+    /**
+     * Get all items in a cart.
+     */
+    @GetMapping("/{cartId}")
+    public ResponseEntity<CartDto> getCart(@PathVariable UUID cartId) {
+        return ResponseEntity.ok(cartService.getCart(cartId));
     }
 
-    @Override
-    @GetMapping
-    public ResponseEntity<List<CartItemDto>> getAll() {
-        return ResponseEntity.ok(cartService.getAllCartItems());
+    /**
+     * Add a furniture item to a cart.
+     */
+    @PostMapping("/{cartId}/add")
+    public ResponseEntity<CartDto> addCartItem(
+            @PathVariable UUID cartId,
+            @Valid @RequestBody AddCartItemRequest request
+    ) {
+        return ResponseEntity.ok(cartService.addCartItem(cartId, request));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<CartItemDto> update(@PathVariable UUID id, @RequestBody AddCartItemRequest request) {
-        CartItemDto updated = cartService.updateCartItem(id, request);
-        return ResponseEntity.ok(updated);
+    /**
+     * Remove an item from the cart.
+     */
+    @DeleteMapping("/{cartId}/remove/{cartItemId}")
+    public ResponseEntity<CartDto> removeCartItem(
+            @PathVariable UUID cartId,
+            @PathVariable UUID cartItemId
+    ) {
+        return ResponseEntity.ok(cartService.removeCartItem(cartId, cartItemId));
     }
 
-    @Override
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable UUID id) {
-        boolean deleted = cartService.removeCartItem(id);
-        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    /**
+     * Clear all items from the cart.
+     */
+    @DeleteMapping("/{cartId}/clear")
+    public ResponseEntity<CartDto> clearCart(@PathVariable UUID cartId) {
+        return ResponseEntity.ok(cartService.clearCart(cartId));
     }
 }

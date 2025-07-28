@@ -2,13 +2,13 @@ package org.example.service.impl;
 
 import org.example.domain.cart.CartItem;
 import org.example.domain.furniture.Furniture;
-import org.example.dto.AddCartItemRequest;
-import org.example.dto.CartItemDto;
 import org.example.mapper.CartItemMapper;
 import org.example.repository.CartItemRepository;
 import org.example.repository.FurnitureRepository;
 import org.example.service.CartItemService;
 import org.springframework.stereotype.Service;
+import org.example.dto.cart.CartItemDto;
+import org.example.dto.cart.AddCartItemRequest;
 
 import java.util.List;
 import java.util.UUID;
