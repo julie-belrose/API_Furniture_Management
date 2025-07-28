@@ -32,5 +32,14 @@ public class Cart {
     private LocalDateTime createdAt;
 
     @Column(nullable = false)
-    private LocalDateTime updatedAt;    
+    private LocalDateTime updatedAt;
+    
+    /**
+     * Updates the total price of the cart by summing up the subtotal of all items.
+     */
+    public void updateTotal() {
+        this.total = items.stream()
+                .mapToDouble(item -> item.getSubtotal())
+                .sum();
+    }
 }

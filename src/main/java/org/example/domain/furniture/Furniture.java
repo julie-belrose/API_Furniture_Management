@@ -1,8 +1,10 @@
 package org.example.domain.furniture;
 
 import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
 import java.util.UUID;
 
@@ -12,8 +14,7 @@ import java.util.UUID;
  */
 @Entity // Marks this class as a JPA entity to be persisted in the database.
 @Table(name = "furniture") // Specifies the table name in the database.
-@Getter // Lombok annotation to generate getter methods for all fields.
-@Setter // Lombok annotation to generate setter methods for all fields.
+@Data
 @NoArgsConstructor // Lombok annotation to generate a no-argument constructor.
 @AllArgsConstructor // Lombok annotation to generate a constructor with all fields.
 @Builder // Lombok annotation to generate a builder pattern for the class.
