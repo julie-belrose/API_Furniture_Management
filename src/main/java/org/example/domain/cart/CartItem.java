@@ -1,7 +1,10 @@
 package org.example.domain.cart;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import org.example.domain.furniture.Furniture;
 
 import java.util.UUID;
@@ -12,8 +15,7 @@ import java.util.UUID;
  */
 @Entity
 @Table(name = "cart_item") // Maps this entity to the "cart_item" table in the database
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -39,4 +41,16 @@ public class CartItem {
     @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
+
+    /**
+     * Calculates the subtotal for this cart item (price * quantity).
+     * 
+     * @return The subtotal amount for this item
+     */
+    public double getSubtotal() {
+        if (furniture == null) {
+            return 0.0;
+        }
+        return furniture.getPrice() * quantity;
+    }
 }

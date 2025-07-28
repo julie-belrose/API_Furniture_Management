@@ -1,8 +1,8 @@
 package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.FurnitureDto;
-import org.example.dto.FurnitureRequest;
+import org.example.dto.furniture.FurnitureDto;
+import org.example.dto.furniture.FurnitureRequest;
 import org.example.service.FurnitureService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

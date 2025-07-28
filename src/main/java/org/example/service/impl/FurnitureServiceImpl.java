@@ -1,8 +1,8 @@
 package org.example.service.impl;
 
 import org.example.domain.furniture.Furniture;
-import org.example.dto.FurnitureDto;
-import org.example.dto.FurnitureRequest;
+import org.example.dto.furniture.FurnitureDto;
+import org.example.dto.furniture.FurnitureRequest;
 import org.example.mapper.FurnitureMapper;
 import org.example.repository.FurnitureRepository;
 import org.example.service.FurnitureService;
