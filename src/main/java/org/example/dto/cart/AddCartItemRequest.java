@@ -16,7 +16,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AddToCartRequest {
+public class AddCartItemRequest {
     @NotNull(message = "Furniture ID is required")
     private UUID furnitureId;
     

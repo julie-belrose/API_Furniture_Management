@@ -1,4 +1,4 @@
-package org.example.dto;
+package org.example.dto.furniture;
 
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
